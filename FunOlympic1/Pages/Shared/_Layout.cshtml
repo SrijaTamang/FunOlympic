@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+@inject SignInManager<IdentityUser> signInManager;
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Payris Olympics</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
+    <link rel="stylesheet" href="~/css/new.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/FunOlympic1.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
+    @RenderSection("CustomCSS", required: false)
+
+
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">
+                    <img src="https://i.pinimg.com/736x/d4/c4/32/d4c432da0d0425f5f7ac6c459a0ab6a9.jpg" width="70" height="50" alt="">
+                     <b>    Payris Olympics TV</b></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                          
+                           <a class="nav-link text-dark" asp-area="" asp-page="/Index">
+                               <!--<i class="bi bi-house-fill"></i> -->
+                               <b> Home </b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fontstyle whitecolor" asp-area="" asp-page="/Broadcasts"><b> Broadcasts </b></a>
+                        </li>
+                     
+                        <li class="nav-item justify-content-center ">
+                            <!-- Start -->
+                            @if (signInManager.IsSignedIn(User))
+                        {
+                            <a class="nav-link    text-red2 " style="font-size:15px" asp-area="" asp-page="/LiveVideo">
+                                <i class="bi bi-broadcast"></i>
+                                <b> Live Games </b> </a>
+                        }
+                        else
+                        {
+                                <a class="nav-link    text-red2 " style="font-size:15px" href="https://localhost:7196/Identity/Account/Login">
+                                    <i class="bi bi-broadcast"></i>
+                                    <b> Live Games </b>
+                                </a>
+                        }
+                        <!-- ENd -->
+                        </li>
+
+                    </ul>
+                    @if(signInManager.IsSignedIn(User)&& User.IsInRole("Admin")) 
+                    {
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-secondary  dropdown-toggle btn-outline-secondary" data-bs-toggle="dropdown" style="color:black">
+                          Admin Panel
+                        </button>
+
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" asp-page="/Videos/Index">Video Upload</a></li>
+                          <li><a class="dropdown-item" asp-page="/Users/Index">User Page</a></li>
+                          <li><a class="dropdown-item" asp-page="/Newss/Index">News</a></li>
+                        </ul>
+                      </div>
+                    }
+
+
+                       <b><partial name="_LoginPartial" /></b>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    
+
+
+
+
+
+
+
+                 
+    <div class="container-fluid">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <style>
+        .text-red2{
+            color: red;
+        }
+        
+        .footer {
+            position: relative;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+
+
+  <footer class="bg-dark text-center text-white">
+   
+  <!-- Grid container -->
+  <div class="container p-4 pb-0">
+    <!-- Section: Social media -->
+    <section class="mb-4">
+      <!-- Facebook -->
+      <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/groups/589602232251169/" role="button"
+        ><i class="bi bi-facebook"></i></a>
+
+      <!-- Twitter -->
+      <a class="btn btn-outline-light btn-floating m-1" href="https://twitter.com/Olympics" role="button"
+        ><i class="bi bi-twitter"></i></a>
+
+      <!-- Instagram -->
+      <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/olympics" role="button"
+        ><i class="bi bi-instagram"></i></a>
+
+    </section>
+  
+   <!-- Section: Social media -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    ©PayrisOlympic 2024
+    
+
+  </div>
+  <!-- Copyright -->
+
+</footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".table").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

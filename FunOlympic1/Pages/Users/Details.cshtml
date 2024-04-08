@@ -1,0 +1,145 @@
+﻿@page
+@model FunOlympic1.Pages.Users.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<style>
+    .h2 {
+        font-size: 30px;
+        font-family: 'EB Garamond';
+        font-weight: bold;
+    }
+
+    .card {
+        padding: 10px;
+    }
+
+   
+</style>
+<div class= "container">
+<h1 class="h2">Details of users</h1>
+
+<div class="card">
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Video.Id)
+        </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Video.Id)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Video.UserName)
+            </dt>
+           
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Video.UserName)
+        </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Video.Email)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Video.Email)
+            </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Video.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Video.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Video.EmailConfirmed)
+        </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Video.EmailConfirmed)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Video.PhoneNumber)
+            </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Video.PhoneNumber)
+        </dd>
+   
+
+    </dl>
+</div>
+
+
+<br />
+    <div>
+    <a asp-page="./Edit" asp-route-id="@Model.Video?.Id" class="btn btn-success"> <i class="bi bi-pencil-square"></i> Edit</a> |
+    <a asp-page="./Index" class="btn btn-info"><i class="bi bi-arrow-return-left"></i> Back to List</a>
+</div>
+
+</div>
+<hr />
+<h3>Comment Logs</h3>
+
+<div class="card">
+    <div class="card-header bg-info text-white">
+        <h4 class="mb-0">User Comments Interaction Logs</h4>
+    </div>
+    <div class="card-body">
+        @if (ViewBag.Comments != null && ViewBag.Comments.Count > 0)
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Content</th>
+                        <th>Created At</th>
+                        <th>Video</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var comment in (List<Comment>)ViewData["Comments"])
+                    {
+                        <tr>
+                            <td>@comment.Content</td>
+                            <td>@comment.CreatedAt</td>
+                            <td>@comment.VideoUploadId</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No comments found for the user.</p>
+        }
+    </div>
+</div>
+<hr />
+<h3>User Logs</h3>
+<div class="card">
+    <div class="card-header bg-success text-white">
+        <h4 class="mb-0">User Logs</h4>
+    </div>
+    <div class="card-body">
+        @if (ViewBag.Logs != null && ViewBag.Logs.Count > 0)
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Log Info</th>
+                        <th>Date and Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var logs in (List<Log>)ViewData["Logs"])
+                    {
+                        <tr>
+                            <td>@logs.Loginfo</td>
+                            <td>@logs.LogDate</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No activity log found for the user.</p>
+        }
+    </div>
+</div>

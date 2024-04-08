@@ -1,0 +1,73 @@
+﻿@page
+@model FunOlympic1.Pages.User.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<style>
+    .h2 {
+        font-size: 30px;
+        font-family: 'EB Garamond';
+        font-weight: bold;
+    }
+
+    .card {
+        padding: 10px;
+    }
+
+    .input {
+        border: 2px solid #4e9372;
+    }
+</style>
+<div class="container"></div>
+<h1 class="h2">Edit</h1>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Video.Id" />
+            <div class="form-group">
+                <label asp-for="Video.UserName" class="control-label"></label>
+                    <input asp-for="Video.UserName" class="form-control input" />
+                <span asp-validation-for="Video.UserName" class="text-danger"></span>
+                </div><br />
+            <div class="form-group">
+                <label asp-for="Video.Name" class="control-label"></label>
+                    <input asp-for="Video.Name" class="form-control input" />
+                <span asp-validation-for="Video.Name" class="text-danger"></span>
+                </div><br />
+            <div class="form-group">
+                <label asp-for="Video.Email" class="control-label"></label>
+                    <input asp-for="Video.Email" class="form-control input" />
+                <span asp-validation-for="Video.Email" class="text-danger"></span>
+                </div><br />
+            
+            <div class="form-group">
+                <label asp-for="Video.PhoneNumber" class="control-label"></label>
+                    <input asp-for="Video.PhoneNumber" class="form-control input" />
+                <span asp-validation-for="Video.PhoneNumber" class="text-danger"></span>
+                </div><br />
+            <div class="form-group">
+                <label asp-for="Video.Country" class="control-label"></label>
+                    <input asp-for="Video.Country" class="form-control input" />
+                <span asp-validation-for="Video.Country" class="text-danger"></span>
+                </div><br />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<br />
+<div>
+    <a asp-page="./Index" class="btn btn-info"> <i class="bi bi-caret-down"></i> Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

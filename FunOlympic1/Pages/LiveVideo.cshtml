@@ -1,0 +1,99 @@
+﻿@page
+@model FunOlympic1.LiveVideoModel
+@inject SignInManager<IdentityUser> signInManager
+
+    
+    <style>
+        .h2 {
+            font-size: 30px;
+            font-family: 'EB Garamond';
+            font-weight: bold;
+        }
+        body{
+        
+        /*background: rgb(162,147,41);
+background: linear-gradient(90deg, rgba(162,147,41,1) 0%, rgba(219,177,65,1) 0%, rgba(221,175,67,1) 5%, rgba(228,167,75,1) 79%, rgba(251,144,98,1) 100%);
+        */
+       
+        background-color: #ff4e00;
+        background-image: linear-gradient(315deg, #ff4e00 0%, #ec9f05 74%);
+
+
+        }
+        .color-white {
+        color: lightgray;}
+        </style>
+
+    <div class="container">
+        <div class="pt-3 pb-2">
+            <h3 class="h2 color-white"> Live Games of Olympic </h3>
+        </div>
+    <div class="row">
+
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    @if (signInManager.IsSignedIn(User))
+                    {
+
+                        <iframe width="100%" height="515" src="https://www.youtube.com/embed/ML_s0NfKKi0" title="FunOlympic Games" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                    }
+                    else
+                    {
+
+                        <p>Please <a href="https://localhost:7196/Identity/Account/Login" style="color:red">Login</a> to view Videos.</p>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+
+
+            <div class="card">
+                <div class="card-body">
+                        
+                  <div class="container">
+     <div class="row">
+         <h2 class="h2">Welcome to Live Chat</h2>
+         <div class="col-4">Receiver</div>
+         <div class="col-4">@Html.DropDownList("receiver",Model.Users, "All")</div>
+     </div>
+     <br />
+     <div class="row">
+         <div class="col-4">Message</div>
+         <div class="col-4"><input type="text" id="message" /></div>
+     </div>
+     <br />
+     <div class="row">
+         <div class="col-6">
+             <input type="button" class="btn btn-success" id="sendMessage" value="Send Message" />
+         </div>
+     </div>
+​
+     <div class="row">
+         <div class="col-10">
+             <ul id="messagesList"></ul>
+         </div>
+    </div>
+</div>
+​
+                    
+                         
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    </div>
+    @Html.Hidden("sender", Model.MyUser) <!--Current logged in username-->
+
+
+
+     @section Scripts
+{
+    <script src="~/js/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/chat.js" asp-append-version="true"></script>
+}

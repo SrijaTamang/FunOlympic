@@ -1,0 +1,56 @@
+﻿@page
+@model FunOlympic1.Pages.Comments.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Broadcast:</h1>
+<div class="video-container">
+    <iframe style="height:60vh;" width="100%" img-fluid src="@ViewBag.VideoLink" title="🔴 Live video player"
+            frameborder="0" allow="accelerometer; autoplay;clipboard-write; encrypted-media;
+                        gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<h4>Comment</h4>
+<hr />
+<div class="row p-6">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Comment.Content" class="control-label"> Type Your Comment Here</label>
+                <textarea asp-for="Comment.Content" class="form-control" ></textarea>
+                <span asp-validation-for="Comment.Content" class="text-danger"></span>
+            </div>
+         
+          
+                <input type="hidden" asp-for="Comment.VideoUploadId" class="form-control" value="@ViewBag.VideoUploadId"></input>
+          
+            <div class="form-group">
+                <input type="submit" value="Post" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+<h4>All Comments:</h4>
+<div class="comments-section">
+    @foreach (var comment in (List<Comment>)ViewData["Comments"])
+    {
+        <div class="card my-3">
+            <div class="card-body">
+                <b> <p>@comment.Content</p></b>
+                <div class="comment-meta">
+                    <span>Posted by: @comment.User.UserName</span>
+                    <span>Posted on: @comment.CreatedAt</span>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

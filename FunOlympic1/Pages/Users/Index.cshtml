@@ -1,0 +1,93 @@
+﻿@page
+@model FunOlympic1.Pages.User.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .h2 {
+        font-size: 30px;
+        font-family: 'EB Garamond';
+        font-weight: bold;
+    }
+
+    .card {
+        padding: 10px;
+    }
+</style>
+
+<div class="container">
+<h1 class="h2">Add New Users to YokyoOlympic</h1>
+
+<p>
+    <a asp-page="Register" class="btn btn-success">Create New Admin</a>
+</p>
+<div class="card">
+<table class="table">
+    <thead>
+        <tr>
+                        <th>
+                @Html.DisplayNameFor(model => model.UserList[0].Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserList[0].UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserList[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserList[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserList[0].EmailConfirmed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserList[0].Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserList[0].PhoneNumber)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.UserList) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td >
+                @Html.DisplayFor(modelItem => item.EmailConfirmed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+
+
+
+            <td>
+                            <a class="btn btn-primary mb-2" asp-page="./Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i> Edit</a>
+
+                            <a class="btn btn-warning mb-2" asp-page="./Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i> Details</a>
+                            <a class="btn btn-danger py-2" asp-page="./Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i> Delete</a>
+                            <a class="btn btn-secondary mt-2" asp-area="Identity" asp-page="/Account/ForgotPassword" asp-route-id="@item.Id"><i class="bi bi-screwdriver"></i> Reset Password</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+    </div>
+</div>

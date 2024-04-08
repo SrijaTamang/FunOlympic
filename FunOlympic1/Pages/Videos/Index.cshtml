@@ -1,0 +1,84 @@
+﻿@page
+@model FunOlympic1.Pages.Videos.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .h2 {
+        font-size: 30px;
+        font-family: 'EB Garamond';
+        font-weight: bold;
+    }
+
+    .card {
+        padding: 10px;
+    }
+</style>
+<div class="container">
+<h1 class="h2">Broadcasts Management Center</h1>
+
+<p>
+    <a asp-page="Create" class="btn btn-success">Create New</a>
+</p>
+    <div class="card">
+        <div class="table-responsive">
+<table class="table">
+    <thead>
+        <tr>
+             <th>
+                @Html.DisplayNameFor(model => model.Video[0].VideoTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Video[0].VideoLink)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.Video[0].ThumbnailLink)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Video[0].Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Video[0].PublishDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Video[0].VideoDescription)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Video) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VideoTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VideoLink)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThumbnailLink)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublishDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VideoDescription)
+            </td>
+            <td>
+                                <a class="btn btn-primary mb-2" asp-page="./Edit" asp-route-id="@item.VideoID"><i class="bi bi-pencil-square"></i> Edit</a>
+
+                                <a class="btn btn-warning mb-2" asp-page="./Details" asp-route-id="@item.VideoID"><i class="bi bi-eye"></i>Details</a> 
+                <a class="btn btn-danger py-2" asp-page="./Delete" asp-route-id="@item.VideoID"><i class="bi bi-trash"></i> Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
+</div>
+</div>
